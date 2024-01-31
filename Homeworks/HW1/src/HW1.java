@@ -2,7 +2,7 @@
 // Class: MIST352-Spring24
 // HW #1
 // This program declares string, integer, boolean, and flag variables. While using those variables to print a message.
-import java.util.Scanner;
+
 public class HW1 {
 	public static void main(String[] args) {
 		// Declaring a string variable not integer
@@ -16,9 +16,6 @@ public class HW1 {
 		
 		// Declaring a float variable instead of double
 		float decimalNumber = 3.14f;
-		
-		// Added scanner
-		Scanner keyboard =  new Scanner (System.in);
 		
 		// Printing a greeting message with new line added quotation marks
 		System.out.println("Hello World\n");
