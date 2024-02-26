@@ -7,27 +7,36 @@ import javax.swing.JOptionPane;
 public class HW2 {
 
 	public static void main(String[] args) {
-		
+		// Welcome with dialog box
 		JOptionPane.showMessageDialog(null, "Welcome to Java Juice Bar!");
 		// Display and ask user
 		String juice = JOptionPane.showInputDialog(null, "Select your base juice:\n 1. Apple - $5.00\n"
 				+ "2. Orange - $4.50\n 3. Mango $6.00\n 4. Carrot - $5.50");
-		// Conversion
-		int selection = Integer.parseInt(juice);
+		// Initialize
+		double Discount = 0;
+		double JuicePrice = 0;
+		double Ginger = 0;
+		int SelectedCase = 0;
+		String SelectedJuice = "";
+		int base = 1;
 		// Switch for juice prices
-		double price = 0.0;
-		switch (selection) {
+		
+		switch (base) {
 			case 1:
-				price = 5.00;
+				JuicePrice = 5.00;
+				SelectedJuice = "Apple";
 				break;
 			case 2:
-				price = 4.50;
+				JuicePrice = 4.50;
+				SelectedJuice = "Orange";
 				break;
 			case 3:
-				price = 6.00;
+				JuicePrice = 6.00;
+				SelectedJuice = "Mango";
 				break;
 			case 4:
-				price = 5.50;
+				JuicePrice = 5.50;
+				SelectedJuice = "Carrot";
 				break;
 			default:
 				JOptionPane.showMessageDialog(null, "Invalid selection. Please restart the program.");
@@ -36,59 +45,38 @@ public class HW2 {
 		
 		// Ask for Add on
 		int addOn = JOptionPane.showConfirmDialog(null, "Woukd you like to add ginger for an extra $1.00?", "Ginger", JOptionPane.YES_NO_OPTION);
-		double totalPrice = price;
-		double discount = 0.0;
-		if (addOn == JOptionPane.YES_OPTION && selection == 3) {
-			totalPrice += 1.00;
-			discount = 0.50;
-			
-		}else if (addOn == JOptionPane.YES_OPTION) {
-				totalPrice += 1.00;
-				
-		} else if (addOn == JOptionPane.NO_OPTION) {
-			totalPrice = price;
+		
+		if (addOn == JOptionPane.YES_OPTION) {
+			Ginger = 1.00;
+			Discount = 0.50;
 			}
-		// Calculate Full Price
-		double fullPrice = totalPrice - discount;
+		String GingerAdd ="";
+		if (Ginger > 0) {
+				GingerAdd = "\nAdd-On: Ginger - $" + String.format("%.2f", Ginger) + "\n-------------------";
+				
+		} 
 		
-		// Calculate tax amount 
-		double taxRate = 0.16;
-		double taxAmount = totalPrice * taxRate;
+			
+		// Calculate ginger and juice cost
+		double JuiceGinger = Ginger + JuicePrice;
 		
-		//Calculate total before tax
-		double discountPrice = fullPrice + discount;
-		
-		// Calculate total with tax
-		double totalPriceWith = totalPrice + taxAmount; 
-		
-		// Bill summary
-		String baseJuice = getBaseJuice(selection);
-        String extras = addOn == JOptionPane.YES_OPTION ? "Ginger ($1.00)" : "None";
-        String billSummary = String.format("|| Final Bill ||\n-------------------\nBase Juice: %s\n-------------------\n"
-        		+ "Add-On: %s\n-------------------\nFull Price: $%0.2f\n-------------------\nDiscount: -$%0.2f\n-------------------\n"
-        		+ "Total Before Tax: $%0.2f\n-------------------\nTax: $%0.2f\n-------------------\nTotal After Tax: $%0.2f", 
-        		baseJuice, extras, fullPrice, discount, discountPrice, taxAmount, totalPriceWith);
-       
-        JOptionPane.showMessageDialog(null, billSummary, "Your Bill", JOptionPane.INFORMATION_MESSAGE);
-    
+		if (addOn == JOptionPane.YES_OPTION & SelectedCase == 3)
+		{
+					JuiceGinger = JuiceGinger - Discount;
 		}
-	//For final bill
-	private static String getBaseJuice(int selection) {
-		switch (selection) {
-		case 1:
-            return "Apple - $5.00";
-        case 2:
-            return "Orange - $4.50";
-        case 3:
-            return "Mango - $6.00";
-        case 4:
-            return "Carrot - $5.50";
-        default:
-            return "Invalid Selection. Plrease restart the program.";
+		// Make Bill
+		String billSummary = "|| Final Bill ||\n-------------------\nBase Juice: " + SelectedJuice + " - $" 
+				+ String.format("%.2f", JuicePrice) + GingerAdd + "\n-------------------" + "\nFull Price: $" + String.format("%.2f", JuiceGinger)
+				+ "\nDiscount: $" + String.format("%.2f", Discount) + "\n-------------------" + "\nTotal Before Tax: $"
+				+ String.format("%.2f", JuiceGinger) + "\nTax: $" + String.format("%.2f", JuiceGinger * 0.16) + "\n-------------------"
+				+ "\nTotal After Tax: $" + String.format("%.2f", JuiceGinger * 1.16) + "\n-------------------";
+		//Show Bill
+		JOptionPane.showMessageDialog(null,billSummary);
+		
 		}
 	}
 
 	
-	}
+	
 
 
