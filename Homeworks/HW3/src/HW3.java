@@ -18,6 +18,8 @@ import javax.swing.JOptionPane;
 
 public class HW3 {
 
+	private static final String SummerizeEmployee = null;
+
 	/**
 	 * 
 	 */
@@ -40,10 +42,28 @@ public class HW3 {
 			case 1:
 				myData.ViewEmployeeAndIDs();
 				break;
+			case 2:
+				 String searchKeyword = JOptionPane.showInputDialog(null, "Enter employee name to search:");
+                 myData.SearchEmployee(searchKeyword);
+                 break;
 			case 3:
-				//you should ask for employee name using GUI
 				myData.ViewRoles();
 				break;
+			case 4:
+				String roleToView = JOptionPane.showInputDialog(null, "Enter role to view employees:");
+                myData.ViewEmployeeForRole(roleToView);
+                break;
+			case 5:
+				double avgSalary = myData.getAverage();
+                JOptionPane.showMessageDialog(null, "Average Salary: " + avgSalary);
+                break;
+			case 6:
+				Employee summaryData = new Employee(SummerizeEmployee);
+				String summary = summaryData.SummerizeEmployee();
+                  break;
+              default:
+                  JOptionPane.showMessageDialog(null, "Invalid choice");
+                  break;
 				
 			}
 			intChoice  = Integer.parseInt( JOptionPane.showInputDialog(null,  ViewOptions()));	
